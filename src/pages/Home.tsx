@@ -13,15 +13,35 @@ const Home: React.FC = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             if (scrollRef.current) {
-                const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+                const { scrollLeft, clientWidth } = scrollRef.current;
 
-                // 最後までスクロールしたら最初に戻す
-                if (scrollLeft + clientWidth >= scrollWidth - 10) {
-                    scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    // 表示されているコンテナ幅（clientWidth）分だけスクロールし、1枚ずつめくる
-                    const scrollAmount = clientWidth;
-                    scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                // DOM要素の座標をもとに正確に次のカードを中央に持ってくる計算
+                const wrappers = Array.from(scrollRef.current.querySelectorAll('.member-card-wrapper')) as HTMLElement[];
+                if (wrappers.length > 0) {
+                    const containerCenter = scrollLeft + clientWidth / 2;
+                    let closestIndex = 0;
+                    let minDistance = Infinity;
+
+                    // 最も中央に近いカードを探す
+                    wrappers.forEach((wrapper, index) => {
+                        const wrapperCenter = wrapper.offsetLeft + wrapper.offsetWidth / 2;
+                        const distance = Math.abs(wrapperCenter - containerCenter);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestIndex = index;
+                        }
+                    });
+
+                    const nextIndex = closestIndex + 1;
+                    if (nextIndex >= wrappers.length) {
+                        // 最後まで到達したら最初に戻る
+                        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        // 次のカードを中央に配置する正確な left 座標を算出
+                        const nextWrapper = wrappers[nextIndex];
+                        const targetLeft = nextWrapper.offsetLeft - (clientWidth / 2) + (nextWrapper.offsetWidth / 2);
+                        scrollRef.current.scrollTo({ left: targetLeft, behavior: 'smooth' });
+                    }
                 }
             }
         }, 3000); // 3秒ごとにスクロール動作
@@ -50,7 +70,7 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            <section className="members-section section">
+            <section className="members-section">
                 <div className="members-responsive-grid" ref={scrollRef}>
                     {members.map((member, index) => (
                         <div className="member-card-wrapper" key={member.id}>

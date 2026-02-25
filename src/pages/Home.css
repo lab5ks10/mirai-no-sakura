@@ -121,6 +121,7 @@
 .members-responsive-grid {
     display: flex;
     overflow-x: auto;
+    position: relative;
     gap: 16px;
     padding: 8px 16px 24px;
     scroll-snap-type: x mandatory;
@@ -138,6 +139,7 @@
     flex: 0 0 100%;
     /* スマホで1画面に1枚完全に収まるようにする */
     scroll-snap-align: center;
+    box-sizing: border-box;
 }
 
 @media (min-width: 600px) {
