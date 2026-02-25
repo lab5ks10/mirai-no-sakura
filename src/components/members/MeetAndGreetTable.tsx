@@ -75,7 +75,7 @@ const MeetAndGreetTable: React.FC<MeetAndGreetTableProps> = ({ member }) => {
                     <span className="legend-item"><span className="legend-color none"></span>受付終了</span>
                 </div>
                 <div className="status-note">
-                    ※受付状況は受付開始後に手動更新いたします。実際の受付状況とは異なる可能性があるので注意してください。
+                    ※受付状況は受付開始後に手動で更新いたします。タイムラグにより実際の受付状況と異なる場合がございます。あらかじめご了承ください。
                 </div>
             </div>
         </div>
