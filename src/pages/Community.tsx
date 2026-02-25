@@ -66,7 +66,7 @@ const Community: React.FC = () => {
     };
 
     return (
-        <div className="community-page container animate-fade-in">
+        <div className="community-page container section animate-fade-in">
             <div className="community-header">
                 <h1 className="section-title">Buddies コミュニティ</h1>
                 <p>4期生について熱く語り合いましょう！</p>

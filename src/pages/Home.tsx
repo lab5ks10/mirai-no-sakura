@@ -30,7 +30,7 @@ const Home: React.FC = () => {
 
     return (
         <div className="home-page">
-            <section className="hero-section glass-panel animate-fade-in">
+            <section className="hero-section section glass-panel animate-fade-in">
                 <div className="hero-bg-image"></div>
                 <div className="hero-content">
                     <h1 className="hero-title">The Growing<br />4th Generation</h1>
@@ -49,7 +49,7 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            <section className="members-section">
+            <section className="members-section section">
                 <div className="members-responsive-grid" ref={scrollRef}>
                     {members.map((member, index) => (
                         <div className="member-card-wrapper" key={member.id}>
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
 
             {/* YouTube セクション */}
             {homeYoutubeUrls && homeYoutubeUrls.length > 0 && (
-                <section className="youtube-section animate-fade-in">
+                <section className="youtube-section section animate-fade-in">
                     <h2 className="section-title">櫻坂46四期生物語</h2>
                     <VideoCarousel urls={homeYoutubeUrls} />
                 </section>
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
 
             {/* Spotify セクション */}
             {homeSpotifyUrls && homeSpotifyUrls.length > 0 && (
-                <section className="spotify-section animate-fade-in" style={{ padding: '0 24px', maxWidth: '800px', margin: '0 auto 48px', width: '100%' }}>
+                <section className="spotify-section section animate-fade-in" style={{ padding: '0 24px', maxWidth: '800px', margin: '0 auto 48px', width: '100%' }}>
                     <h2 className="section-title">Music</h2>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                         {homeSpotifyUrls.map((url, index) => {

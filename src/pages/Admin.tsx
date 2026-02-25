@@ -146,7 +146,7 @@ const Admin: React.FC = () => {
     };
 
     return (
-        <div className="admin-page container animate-fade-in" style={{ padding: '32px 16px' }}>
+        <div className="admin-page container section animate-fade-in" style={{ padding: '32px 16px' }}>
             <div className="admin-header glass-panel" style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                     <Link to="/" className="back-link style-override" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--color-text-primary)' }}>

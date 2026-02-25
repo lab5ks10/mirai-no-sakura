@@ -76,7 +76,7 @@ const MemberDetail: React.FC = () => {
             {/* ヘッダー関係をグループ化してgapを開けないようにする */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <Link to="/" style={{ textDecoration: 'none', display: 'block' }}>
-                    <section className="hero-section glass-panel animate-fade-in" style={{ margin: 0, minHeight: '220px', padding: '24px 16px', cursor: 'pointer' }}>
+                    <section className="hero-section section glass-panel animate-fade-in" style={{ margin: 0, minHeight: '220px', padding: '24px 16px', cursor: 'pointer' }}>
                         <div className="hero-bg-image"></div>
                         <div className="hero-content" style={{ padding: 0 }}>
                             <h1 className="hero-title" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)' }}>The Growing<br />4th Generation</h1>
@@ -92,7 +92,7 @@ const MemberDetail: React.FC = () => {
             </div>
 
             {/* Section 1: Profile */}
-            <section className="profile-section" style={{ padding: '0 24px' }}>
+            <section className="profile-section section" style={{ padding: '0 24px' }}>
                 <div className="profile-image-container">
                     {member.imageUrl ? (
                         <img src={member.imageUrl} alt={`${member.name}のプロフィール画像`} className="profile-image-detail" />
@@ -156,14 +156,14 @@ const MemberDetail: React.FC = () => {
 
             {/* Section 2: Related Videos */}
             {hasYouTubeUrls && (
-                <section className="vlog-section" style={{ padding: '0 24px', marginBottom: '48px' }}>
+                <section className="vlog-section section" style={{ padding: '0 24px', marginBottom: '48px' }}>
                     <h2 className="section-heading">関連動画</h2>
                     <VideoCarousel urls={member.youtubeUrls!} />
                 </section>
             )}
 
             {/* Section 3: BBS */}
-            <section className="bbs-section" style={{ padding: '0 24px' }}>
+            <section className="bbs-section section" style={{ padding: '0 24px' }}>
                 <h2 className="section-heading">魅力発信掲示板</h2>
                 <div className="bbs-container">
                     {/* メッセージ一覧 (上部) */}
