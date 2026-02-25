@@ -15,11 +15,12 @@ const Home: React.FC = () => {
             if (scrollRef.current) {
                 const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
 
-                // 最後までスクロールしたら最初に戻す、そうでない場合は右へ少しスクロール
+                // 最後までスクロールしたら最初に戻す
                 if (scrollLeft + clientWidth >= scrollWidth - 10) {
                     scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
-                    const scrollAmount = clientWidth > 600 ? 300 : 250; // スクロール量
+                    // 表示されているコンテナ幅（clientWidth）分だけスクロールし、1枚ずつめくる
+                    const scrollAmount = clientWidth;
                     scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
                 }
             }

@@ -135,9 +135,8 @@
 }
 
 .member-card-wrapper {
-    flex: 0 0 85%;
-    /* スマホでほぼ画面いっぱいに（左右に少し次が見える程度） */
-    max-width: 320px;
+    flex: 0 0 100%;
+    /* スマホで1画面に1枚完全に収まるようにする */
     scroll-snap-align: center;
 }
 
