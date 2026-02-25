@@ -46,6 +46,7 @@ body {
     linear-gradient(to bottom, #051419, #08212a);
   background-attachment: fixed;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 a {
