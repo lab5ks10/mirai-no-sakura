@@ -1,0 +1,26 @@
+.admin-page {
+    min-height: 80vh;
+}
+
+.style-override:hover {
+    color: var(--color-accent) !important;
+}
+
+.reset-button:hover {
+    background: rgba(255, 111, 0, 0.1) !important;
+    border-color: var(--color-accent) !important;
+    color: var(--color-accent) !important;
+}
+
+.member-select-btn:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.member-select-btn.active:hover {
+    background: rgba(255, 111, 0, 0.3) !important;
+}
+
+.success-toast {
+    box-shadow: 0 4px 12px rgba(50, 205, 50, 0.2);
+    font-weight: 600;
+}

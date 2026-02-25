@@ -1,0 +1,490 @@
+.member-detail-page {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding-bottom: 64px;
+}
+
+.detail-nav {
+    margin-bottom: -32px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 0;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    width: fit-content;
+    transition: all var(--transition-fast);
+}
+
+.back-link:hover {
+    color: var(--color-accent-dark);
+}
+
+.section-heading {
+    font-size: 2rem;
+    color: var(--color-text-primary);
+    margin-bottom: 32px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    position: relative;
+}
+
+.section-heading::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent);
+    margin: 16px auto 0;
+    border-radius: 0;
+}
+
+/* --- Section 1: Profile --- */
+.profile-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+    .profile-section {
+        grid-template-columns: 4fr 5fr;
+    }
+}
+
+.profile-image-container {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.profile-image-detail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+}
+
+.placeholder-text-large {
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.2em;
+}
+
+.profile-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.profile-name-en {
+    font-size: 1rem;
+    color: var(--color-accent-dark);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.profile-name {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+}
+
+.profile-name-kana {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.profile-catchphrase-wrap {
+    padding: 20px 24px;
+    background: linear-gradient(to right, rgba(255, 111, 0, 0.1), transparent);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0;
+}
+
+.profile-catchphrase {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    font-style: italic;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.profile-grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.profile-label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.profile-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.keyword-tag {
+    padding: 8px 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.profile-color-indicator {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+}
+
+.color-label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.color-circles {
+    display: flex;
+    gap: -8px;
+}
+
+.color-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 3px solid var(--color-surface);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.color-circle:first-child {
+    z-index: 2;
+}
+
+.color-circle:last-child {
+    margin-left: -12px;
+    z-index: 1;
+}
+
+/* Hero Section (シネマティックタイトル) の微調整 */
+.member-detail-page .hero-section {
+    min-height: 220px !important;
+}
+
+/* --- Section 2: Vlog --- */
+.vlog-section {
+    width: 100%;
+}
+
+.vlog-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+}
+
+.vlog-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a24, #2a2a35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.vlog-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.2em;
+}
+
+.play-button-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-normal);
+}
+
+.play-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 0;
+    background: rgba(255, 111, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all var(--transition-normal);
+}
+
+.vlog-container:hover .play-button-overlay {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.vlog-container:hover .play-button {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(255, 111, 0, 0.6);
+}
+
+/* --- Section 3: BBS --- */
+.bbs-section {
+    width: 100%;
+}
+
+.bbs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.bbs-form-side {
+    padding: 32px;
+    border-top: 2px solid var(--color-border);
+    /* 入力エリアの区切り */
+}
+
+.form-title {
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+}
+
+.stylish-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.stylish-input {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-bottom: 2px solid var(--color-border);
+    background: transparent;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    transition: border-color var(--transition-fast);
+    resize: vertical;
+}
+
+.stylish-input:focus {
+    outline: none;
+    border-bottom-color: var(--color-accent);
+}
+
+.submit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-top: 8px;
+}
+
+.submit-button:hover:not(:disabled) {
+    background: var(--color-accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(255, 111, 0, 0.3);
+}
+
+.submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--color-text-secondary);
+}
+
+.bbs-list-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.scrollable-bbs {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 16px;
+    /* スクロールバー用の微調整: 右側の余白を追加してカードがスクロールバーに被らないようにする */
+}
+
+/* Webkit スクロールバーのカスタマイズ (Chrome, Safari, Edge) */
+.scrollable-bbs::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-bbs::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollable-bbs::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 3px;
+}
+
+.scrollable-bbs::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-text-secondary);
+}
+
+.comment-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform var(--transition-fast);
+}
+
+.comment-card:hover {
+    transform: scale(1.02);
+    z-index: 10;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 12px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-icon {
+    color: var(--color-accent);
+}
+
+.comment-nickname {
+    font-weight: 700;
+    color: var(--color-text-primary);
+    font-size: 1.1rem;
+}
+
+.comment-time {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.comment-delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all var(--transition-fast);
+}
+
+.comment-delete-btn:hover {
+    color: #ef4444;
+    /* 赤系統のアクセント色 */
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.comment-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    white-space: pre-wrap;
+}

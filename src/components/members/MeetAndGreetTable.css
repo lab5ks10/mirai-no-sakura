@@ -1,0 +1,209 @@
+.meet-and-greet-container {
+    padding: 24px;
+    margin-top: 32px;
+    border-radius: 0;
+}
+
+.meet-and-greet-title {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.meet-and-greet-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.meet-and-greet-table th,
+.meet-and-greet-table td {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 8px;
+    text-align: center;
+}
+
+.meet-and-greet-table th {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.part-name {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.part-time {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+.date-cell {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background: rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.status-cell {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.status-available {
+    color: #4CAF50;
+    /* 緑 */
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.status-sold-out {
+    color: #F44336;
+    /* 赤 */
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.status-none {
+    color: var(--color-text-secondary);
+}
+
+.status-legend {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: 0;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.legend-color.available {
+    background-color: #4CAF50;
+}
+
+.legend-color.sold-out {
+    background-color: #F44336;
+}
+
+.legend-color.none {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 追加要素のスタイル */
+.meet-and-greet-schedule {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+}
+
+.schedule-title {
+    color: var(--color-accent);
+    font-size: 1rem;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+.schedule-item {
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+    padding-left: 12px;
+    position: relative;
+    letter-spacing: 0.05em;
+}
+
+.schedule-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+}
+
+.schedule-item:last-child {
+    margin-bottom: 0;
+}
+
+.meet-and-greet-rules-link {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.rules-button {
+    display: inline-block;
+    background: var(--color-accent);
+    color: white;
+    padding: 12px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
+}
+
+.rules-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 111, 0, 0.4);
+}
+
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 16px;
+    gap: 16px;
+}
+
+.status-note {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-align: right;
+    max-width: 50%;
+    line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+    .table-footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .status-legend {
+        justify-content: center;
+    }
+
+    .status-note {
+        text-align: center;
+        max-width: 100%;
+        margin-top: 12px;
+    }
+}

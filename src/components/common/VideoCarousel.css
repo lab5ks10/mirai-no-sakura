@@ -1,0 +1,100 @@
+/* カルーセル全体のラッパー */
+.video-carousel-wrapper {
+    width: 100%;
+    margin-bottom: 24px;
+    position: relative;
+    /* 左右にはみ出さないように外側を隠す */
+    overflow: hidden;
+    padding-bottom: 40px;
+    /* インジケーター用のスペース */
+}
+
+/* スクロールコンテナ */
+.video-carousel-container {
+    display: flex;
+    overflow-x: auto;
+    /* スナップの強制 */
+    scroll-snap-type: x mandatory;
+    /* スクロールバーを隠す（スタイリッシュにするため） */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* スムーズスクロール */
+    scroll-behavior: smooth;
+
+    /* 
+     * iPhone 14 Pro などのスマホ幅でもコンテナ幅が100%になり、
+     * item が画面幅ぴったり(100vwに近い状態)でおさまるようにする。
+     */
+    width: 100%;
+}
+
+.video-carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* 各スライド（動画カード） */
+.video-carousel-item {
+    /* 画面幅の85%確保し、隣のカードが少し見えるようにサイズを縮小する */
+    flex: 0 0 95%;
+    max-width: 500px;
+    /* PC向けの上限（以前の800pxから縮小） */
+    scroll-snap-align: center;
+    /* 両端のパディングを取ることで、カードを中央に配置する */
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+/* iframeを内包するglass-panel（カード自体）の設定 */
+.video-carousel-item.glass-panel {
+    border-radius: 0;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    transition: box-shadow var(--transition-fast);
+}
+
+.video-carousel-item.glass-panel:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ドットインジケーター群 */
+.video-carousel-indicators {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    pointer-events: none;
+    /* コンテナ全体へのクリックは透過、ボタン自体は個別にpointer-events: auto */
+}
+
+/* 各ドットボタン */
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.carousel-dot:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+/* アクティブなドット（添付画像の●に近い表現、枠線付きの◎にするなどお好みで） */
+.carousel-dot.active {
+    background-color: transparent;
+    border: 2px solid white;
+    width: 14px;
+    height: 14px;
+}
