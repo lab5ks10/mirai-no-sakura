@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Member } from '../../data/members';
 import { Link } from 'react-router-dom';
+import { MapPin } from 'lucide-react';
 import './MemberCard.css';
 
 interface Props {
@@ -14,28 +15,39 @@ const MemberCard: React.FC<Props> = ({ member, index }) => {
     return (
         <Link
             to={`/member/${member.id}`}
-            className="member-card animate-fade-in"
+            className="member-card new-layout animate-fade-in"
             style={{ animationDelay }}
         >
-            <div className="card-image-wrapper">
-                {member.imageUrl ? (
-                    <img src={member.imageUrl} alt={`${member.name}のプロフィール画像`} className="profile-image-actual" />
-                ) : (
-                    <div className="placeholder-image" style={{ background: `linear-gradient(135deg, ${member.color1}, ${member.color2})` }}>
-                        <span className="placeholder-text">PHOTO 3:4</span>
-                    </div>
-                )}
-                <div className="card-overlay">
-                    <div className="card-content">
-                        <span className="member-origin">{member.birthPlace}出身</span>
-                        <h3 className="member-name truncate">{member.name}</h3>
-                        <p className="member-name-en">{member.nameEn}</p>
-                        <div className="member-tags">
-                            {member.tags.slice(0, 2).map((tag, i) => (
-                                <span key={i} className="member-tag">{tag}</span>
-                            ))}
-                        </div>
-                    </div>
+            <div className="card-inner">
+                {/* 1. 左上の出身地ブロック */}
+                <div className="origin-block" style={{ backgroundColor: member.color1 }}>
+                    <MapPin className="origin-icon" size={24} />
+                    <span className="origin-text">{member.birthPlace}</span>
+                </div>
+
+                {/* 2. 右上のテキストエリア */}
+                <div className="text-block">
+                    <p className="member-name-en">.{member.nameEn.toUpperCase()}.</p>
+                    <h3 className="member-name-jp">{member.name}</h3>
+                    <p className="member-name-kana">{member.nameKana}</p>
+                </div>
+
+                {/* 3. 左下の装飾ライン */}
+                <div className="decoration-lines">
+                    <div className="line line-1" style={{ backgroundColor: member.color2 }}></div>
+                    <div className="line line-2" style={{ backgroundColor: member.color2 }}></div>
+                    <div className="line line-3" style={{ backgroundColor: member.color2 }}></div>
+                    <div className="line line-4" style={{ backgroundColor: member.color2 }}></div>
+                    <div className="line line-5" style={{ backgroundColor: member.color2 }}></div>
+                </div>
+
+                {/* 4. メインビジュアル（右下の巨大な正円） */}
+                <div className="circle-image-wrapper">
+                    {member.imageUrl ? (
+                        <img src={member.imageUrl} alt={`${member.name}のプロフィール画像`} className="circle-image" />
+                    ) : (
+                        <div className="placeholder-circle" style={{ background: `linear-gradient(135deg, ${member.color1}, ${member.color2})` }}></div>
+                    )}
                 </div>
             </div>
         </Link>

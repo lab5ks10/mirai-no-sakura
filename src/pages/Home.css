@@ -117,44 +117,39 @@
     box-shadow: 0 4px 12px rgba(255, 111, 0, 0.4);
 }
 
-/* メンバーリスト (横スクロール) */
-.members-responsive-grid {
+/* メンバーリスト (縦スクロール) */
+.members-vertical-list {
     display: flex;
-    overflow-x: auto;
-    position: relative;
-    gap: 16px;
-    padding: 8px 16px 24px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
-    /* 自動スクロール用 */
-}
-
-.members-responsive-grid::-webkit-scrollbar {
-    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 24px 16px 48px;
 }
 
 .member-card-wrapper {
-    flex: 0 0 100%;
-    /* スマホで1画面に1枚完全に収まるようにする */
-    scroll-snap-align: center;
-    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
+    .members-vertical-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        padding: 24px 48px 48px;
+    }
+
     .member-card-wrapper {
-        flex: 0 0 45%;
+        width: calc(50% - 12px);
+        max-width: 400px;
     }
 }
 
 @media (min-width: 1024px) {
-    .members-responsive-grid {
-        padding: 24px 48px;
-    }
-
     .member-card-wrapper {
-        flex: 0 0 300px;
+        width: calc(33.333% - 16px);
     }
 }
 
