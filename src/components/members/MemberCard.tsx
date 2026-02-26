@@ -19,9 +19,6 @@ const MemberCard: React.FC<Props> = ({ member, index }) => {
             style={{ animationDelay }}
         >
             <div className="card-inner">
-                {/* 背景：日食（エクリプス）エフェクト */}
-                <div className="eclipse-bg"></div>
-
                 {/* 1. 左上の出身地ブロック */}
                 <div className="origin-block" style={{ backgroundColor: member.color1 }}>
                     <MapPin className="origin-icon" size={24} />
