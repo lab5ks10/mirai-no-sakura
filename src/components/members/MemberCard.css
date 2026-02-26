@@ -52,8 +52,32 @@
 }
 
 .origin-icon {
-    margin-bottom: 8px;
+    /* LucideからSVGへの移行対応 */
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: currentColor;
+    /* svg fill="currentColor"を活用 */
     opacity: 0.9;
+    margin-bottom: 8px;
+    /* SVGがコンテナ内に綺麗に収まる様にする */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prefecture-svg {
+    /* 都道府県シルエット専用の微調整 */
+    overflow: visible;
+}
+
+.placeholder-icon {
+    /* 座標が見つからなかった場合のプレースホルダー */
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: currentColor;
+    opacity: 0.5;
 }
 
 .origin-text {

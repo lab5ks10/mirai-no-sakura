@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Member } from '../../data/members';
+import { prefecturePaths } from '../../data/prefecturePaths';
 import { Link } from 'react-router-dom';
-import { MapPin } from 'lucide-react';
 import './MemberCard.css';
 
 interface Props {
@@ -21,7 +21,17 @@ const MemberCard: React.FC<Props> = ({ member, index }) => {
             <div className="card-inner">
                 {/* 1. 左上の出身地ブロック */}
                 <div className="origin-block" style={{ backgroundColor: member.color1 }}>
-                    <MapPin className="origin-icon" size={24} />
+                    {prefecturePaths[member.birthPlace] ? (
+                        <svg
+                            className="origin-icon prefecture-svg"
+                            viewBox={prefecturePaths[member.birthPlace].viewBox}
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path d={prefecturePaths[member.birthPlace].path} fill="currentColor" />
+                        </svg>
+                    ) : (
+                        <div className="origin-icon placeholder-icon"></div>
+                    )}
                     <span className="origin-text">{member.birthPlace}</span>
                 </div>
 
