@@ -51,14 +51,14 @@
 }
 
 .origin-icon {
-    /* LucideからSVGへの移行対応 */
-    width: 20px;
-    height: 20px;
+    /* LucideからSVGへの移行対応・拡大仕様 (元20px -> 48px: 約2.4倍拡大) */
+    width: 48px;
+    height: 48px;
     flex-shrink: 0;
     color: currentColor;
     /* svg fill="currentColor"を活用 */
-    opacity: 0.9;
-    margin-bottom: 8px;
+    opacity: 0.95;
+    margin-bottom: 4px;
     /* SVGがコンテナ内に綺麗に収まる様にする */
     display: inline-flex;
     align-items: center;

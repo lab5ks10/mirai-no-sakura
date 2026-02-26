@@ -27,7 +27,22 @@ const MemberCard: React.FC<Props> = ({ member, index }) => {
                             viewBox={prefecturePaths[member.birthPlace].viewBox}
                             xmlns="http://www.w3.org/2000/svg"
                         >
-                            <path d={prefecturePaths[member.birthPlace].path} fill="currentColor" />
+                            <defs>
+                                <filter id={`inner-shadow-${member.id}`}>
+                                    {/* 内側シャドウの生成 */}
+                                    <feOffset dx="0" dy="2" />
+                                    <feGaussianBlur stdDeviation="1" result="offset-blur" />
+                                    <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse" />
+                                    <feFlood floodColor="black" floodOpacity="0.15" result="color" />
+                                    <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+                                    <feComposite operator="over" in="shadow" in2="SourceGraphic" />
+                                </filter>
+                            </defs>
+                            <path
+                                d={prefecturePaths[member.birthPlace].path}
+                                fill="currentColor"
+                                style={{ filter: `url(#inner-shadow-${member.id})` }}
+                            />
                         </svg>
                     ) : (
                         <div className="origin-icon placeholder-icon"></div>
