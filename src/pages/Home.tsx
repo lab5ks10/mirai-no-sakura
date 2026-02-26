@@ -7,7 +7,7 @@ import VideoCarousel from '../components/common/VideoCarousel';
 import './Home.css';
 
 const Home: React.FC = () => {
-    const { members, homeYoutubeUrls, homeSpotifyUrls } = useMembers();
+    const { members, homeYoutubeUrls, homeSpotifyUrls, homeMvUrl } = useMembers();
 
     return (
         <div className="home-page">
@@ -39,6 +39,21 @@ const Home: React.FC = () => {
                     ))}
                 </div>
             </section>
+
+            {/* 四期生 MV セクション */}
+            {homeMvUrl && (
+                <section className="mv-section section animate-fade-in" style={{ padding: '0 24px', maxWidth: '800px', margin: '0 auto 48px', width: '100%' }}>
+                    <h2 className="section-title">四期生 MV</h2>
+                    <div className="mv-container glass-panel">
+                        <iframe
+                            src={homeMvUrl}
+                            title="四期生 MV"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                </section>
+            )}
 
             {/* YouTube セクション */}
             {homeYoutubeUrls && homeYoutubeUrls.length > 0 && (

@@ -9,6 +9,8 @@ interface MemberContextType {
     updateHomeYoutubeUrls: (urls: string[]) => void;
     homeSpotifyUrls: string[];
     updateHomeSpotifyUrls: (urls: string[]) => void;
+    homeMvUrl: string | null;
+    updateHomeMvUrl: (url: string | null) => void;
 }
 
 const MemberContext = createContext<MemberContextType | undefined>(undefined);
@@ -75,6 +77,11 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         return ["https://open.spotify.com/embed/track/49cxVtrML7Xo63UFaaJrUR?utm_source=generator"];
     });
 
+    const [homeMvUrl, setHomeMvUrl] = useState<string | null>(() => {
+        const saved = localStorage.getItem('sakura_home_mv_url');
+        return saved ? saved : null;
+    });
+
     useEffect(() => {
         localStorage.setItem('sakura_members_data', JSON.stringify(members));
     }, [members]);
@@ -86,6 +93,14 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     useEffect(() => {
         localStorage.setItem('sakura_home_spotify_urls', JSON.stringify(homeSpotifyUrls));
     }, [homeSpotifyUrls]);
+
+    useEffect(() => {
+        if (homeMvUrl) {
+            localStorage.setItem('sakura_home_mv_url', homeMvUrl);
+        } else {
+            localStorage.removeItem('sakura_home_mv_url');
+        }
+    }, [homeMvUrl]);
 
     const updateMember = (updatedMember: Member) => {
         setMembers(prev => prev.map(m => m.id === updatedMember.id ? updatedMember : m));
@@ -99,6 +114,8 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setHomeSpotifyUrls(["https://open.spotify.com/embed/track/49cxVtrML7Xo63UFaaJrUR?utm_source=generator"]);
         localStorage.removeItem('sakura_home_spotify_urls');
         localStorage.removeItem('sakura_home_spotify_url'); // 古いキーも一応消しておく
+        setHomeMvUrl(null);
+        localStorage.removeItem('sakura_home_mv_url');
     };
 
     const updateHomeYoutubeUrls = (urls: string[]) => {
@@ -109,8 +126,12 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setHomeSpotifyUrls(urls);
     };
 
+    const updateHomeMvUrl = (url: string | null) => {
+        setHomeMvUrl(url);
+    };
+
     return (
-        <MemberContext.Provider value={{ members, updateMember, resetMembers, homeYoutubeUrls, updateHomeYoutubeUrls, homeSpotifyUrls, updateHomeSpotifyUrls }}>
+        <MemberContext.Provider value={{ members, updateMember, resetMembers, homeYoutubeUrls, updateHomeYoutubeUrls, homeSpotifyUrls, updateHomeSpotifyUrls, homeMvUrl, updateHomeMvUrl }}>
             {children}
         </MemberContext.Provider>
     );

@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 import './Admin.css';
 
 const Admin: React.FC = () => {
-    const { members, updateMember, resetMembers, homeYoutubeUrls, updateHomeYoutubeUrls, homeSpotifyUrls, updateHomeSpotifyUrls } = useMembers();
+    const { members, updateMember, resetMembers, homeYoutubeUrls, updateHomeYoutubeUrls, homeSpotifyUrls, updateHomeSpotifyUrls, homeMvUrl, updateHomeMvUrl } = useMembers();
     const [selectedMemberId, setSelectedMemberId] = useState<string>(members[0]?.id || '');
     const [editForm, setEditForm] = useState<Member | null>(null);
     const [newTag, setNewTag] = useState('');
     const [newYoutubeUrl, setNewYoutubeUrl] = useState('');
     const [newHomeYoutubeUrl, setNewHomeYoutubeUrl] = useState('');
     const [localHomeUrls, setLocalHomeUrls] = useState<string[]>(homeYoutubeUrls);
+    const [localHomeMvUrl, setLocalHomeMvUrl] = useState<string>(homeMvUrl || '');
     const [newHomeSpotifyUrl, setNewHomeSpotifyUrl] = useState('');
     const [localHomeSpotifyUrls, setLocalHomeSpotifyUrls] = useState<string[]>(homeSpotifyUrls);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -141,6 +142,18 @@ const Admin: React.FC = () => {
         updateMember(editForm);
         updateHomeYoutubeUrls(localHomeUrls);
         updateHomeSpotifyUrls(localHomeSpotifyUrls);
+
+        // MV URLの自動embed変換処理
+        let formattedMvUrl = localHomeMvUrl.trim();
+        if (formattedMvUrl && !formattedMvUrl.includes('/embed/')) {
+            const videoIdMatch = formattedMvUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+            if (videoIdMatch && videoIdMatch[1]) {
+                formattedMvUrl = `https://www.youtube.com/embed/${videoIdMatch[1]}?rel=0`;
+            }
+        }
+        updateHomeMvUrl(formattedMvUrl || null);
+        setLocalHomeMvUrl(formattedMvUrl);
+
         setShowSuccessMessage(true);
         setTimeout(() => setShowSuccessMessage(false), 3000);
     };
@@ -351,6 +364,33 @@ const Admin: React.FC = () => {
                                     ))}
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    {/* ホーム画面 四期生MV 設定 */}
+                    <div className="edit-section" style={{ marginBottom: '40px', paddingTop: '32px', borderTop: '1px solid var(--color-border)' }}>
+                        <h3 style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ width: '4px', height: '16px', background: 'var(--color-accent)', display: 'inline-block' }}></span>
+                            トップページ 四期生MV (YouTube埋め込み)
+                        </h3>
+                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.85rem', marginBottom: '16px' }}>
+                            ※トップページの「四期生物語」セクションの直前に表示される、メインの四期生MVを指定します。<br />
+                            ※通常のYouTube URL（例: https://www.youtube.com/watch?v=... または https://youtu.be/...）を入力して保存すると、自動で埋め込み用URLに変換されます。<br />
+                            ※未設定（空欄）の場合はセクション自体が非表示になります。
+                        </p>
+                        <div style={{ display: 'flex', gap: '12px' }}>
+                            <input
+                                type="url"
+                                placeholder="YouTube URLを入力（例: https://youtu.be/...）"
+                                value={localHomeMvUrl}
+                                onChange={e => setLocalHomeMvUrl(e.target.value)}
+                                style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text-primary)', padding: '12px 16px', borderRadius: '4px', flex: 1 }}
+                            />
+                            {localHomeMvUrl && (
+                                <button onClick={() => setLocalHomeMvUrl('')} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'transparent', border: '1px solid var(--color-border)', color: 'var(--color-text-secondary)', padding: '0 16px', borderRadius: '4px', cursor: 'pointer' }}>
+                                    クリア
+                                </button>
+                            )}
                         </div>
                     </div>
 
