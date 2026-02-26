@@ -238,6 +238,50 @@
     z-index: 1;
 }
 
+/* --- Blog Link --- */
+.profile-blog-link {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.blog-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    text-decoration: none;
+    border-radius: var(--border-radius-panel);
+    /* 22px 角丸 */
+    transition: all var(--transition-normal);
+    background: rgba(14, 42, 47, 0.6);
+    /* ディープティール */
+}
+
+.blog-button:hover {
+    background: rgba(191, 162, 94, 0.15);
+    /* ゴールド 15% */
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.blog-button-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: 0.05em;
+}
+
+.blog-button-icon {
+    color: var(--color-accent);
+    /* ゴールドのアイコン */
+}
+
 /* Hero Section (シネマティックタイトル) の微調整 */
 .member-detail-page .hero-section {
     min-height: 220px !important;

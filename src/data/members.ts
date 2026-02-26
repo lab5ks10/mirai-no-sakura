@@ -14,6 +14,7 @@ export interface Member {
     imageUrl?: string;
     youtubeUrls?: string[];
     meetAndGreet?: Record<string, 'available' | 'sold_out' | 'none'>;
+    blogCt?: number;
 }
 
 export const MEET_AND_GREET_DATES = [
@@ -49,7 +50,8 @@ export const initialMembers: Member[] = [
         color1: "#ffb6c1",
         color2: "#ff69b4",
         imageUrl: "/images/members/asai.jpg",
-        youtubeUrls: ["https://www.youtube.com/watch?v=Rk54JNn7Qw4"]
+        youtubeUrls: ["https://www.youtube.com/watch?v=Rk54JNn7Qw4"],
+        blogCt: 70
     },
     {
         id: "inaguma-hina",
@@ -65,6 +67,7 @@ export const initialMembers: Member[] = [
         color1: "#ffc800",
         color2: "#ffa500",
         imageUrl: "/images/members/inaguma.jpg",
+        blogCt: 71
     },
     {
         id: "katsumata-haru",
@@ -79,7 +82,8 @@ export const initialMembers: Member[] = [
         tags: ["4期最年長", "京都大学", "はるさん"],
         color1: "#d8bfd8",
         color2: "#dda0dd",
-        imageUrl: "/images/members/katsumata.jpg"
+        imageUrl: "/images/members/katsumata.jpg",
+        blogCt: 72
     },
     {
         id: "sato-neo",
@@ -94,7 +98,8 @@ export const initialMembers: Member[] = [
         tags: ["14th選抜", "さくら学院出身", "ねおつん"],
         color1: "#ff69b4",
         color2: "#ff1493",
-        imageUrl: "/images/members/sato.jpg"
+        imageUrl: "/images/members/sato.jpg",
+        blogCt: 73
     },
     {
         id: "nakagawa-chihiro",
@@ -109,7 +114,8 @@ export const initialMembers: Member[] = [
         tags: ["相方はとりきち", "ちいたん"],
         color1: "#87ceeb",
         color2: "#00bfff",
-        imageUrl: "/images/members/nakagawa.jpg"
+        imageUrl: "/images/members/nakagawa.jpg",
+        blogCt: 74
     },
     {
         id: "matsumoto-wako",
@@ -124,7 +130,8 @@ export const initialMembers: Member[] = [
         tags: ["あざとい", "わこち"],
         color1: "#ffa07a",
         color2: "#ff7f50",
-        imageUrl: "/images/members/matsumoto.jpg"
+        imageUrl: "/images/members/matsumoto.jpg",
+        blogCt: 75
     },
     {
         id: "meguro-hiiro",
@@ -139,7 +146,8 @@ export const initialMembers: Member[] = [
         tags: ["ダンスが得意", "ひいろ"],
         color1: "#32cd32",
         color2: "#228b22",
-        imageUrl: "/images/members/meguro.jpg"
+        imageUrl: "/images/members/meguro.jpg",
+        blogCt: 76
     },
     {
         id: "yamakawa-ui",
@@ -154,7 +162,8 @@ export const initialMembers: Member[] = [
         tags: ["14th選抜", "元チア部", "ういたん"],
         color1: "#4682b4",
         color2: "#4169e1",
-        imageUrl: "/images/members/yamakawa.jpg"
+        imageUrl: "/images/members/yamakawa.jpg",
+        blogCt: 77
     },
     {
         id: "yamada-momomi",
@@ -169,6 +178,7 @@ export const initialMembers: Member[] = [
         tags: ["4期最年少", "運動神経抜群", "ももちゃん"],
         color1: "#dda0dd",
         color2: "#ba55d3",
-        imageUrl: "/images/members/yamada.jpg"
+        imageUrl: "/images/members/yamada.jpg",
+        blogCt: 78
     }
 ];

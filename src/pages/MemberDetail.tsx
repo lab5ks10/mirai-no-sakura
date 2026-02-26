@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useMembers } from '../context/MemberContext';
-import { ArrowLeft, Send, UserCircle2, Trash2 } from 'lucide-react';
+import { ArrowLeft, Send, UserCircle2, Trash2, ExternalLink } from 'lucide-react';
 import VideoCarousel from '../components/common/VideoCarousel';
 import MeetAndGreetTable from '../components/members/MeetAndGreetTable';
 import './MemberDetail.css';
@@ -146,6 +146,21 @@ const MemberDetail: React.FC = () => {
                             <div className="color-circle" style={{ backgroundColor: member.color2 }}></div>
                         </div>
                     </div>
+
+                    {member.blogCt && (
+                        <div className="profile-blog-link">
+                            <span className="color-label">公式ブログ</span>
+                            <a
+                                href={`https://sakurazaka46.com/s/s46/diary/blog/list?ima=0000&ct=${member.blogCt}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="blog-button glass-panel"
+                            >
+                                <span className="blog-button-text">{member.name} のブログはこちら</span>
+                                <ExternalLink size={20} className="blog-button-icon" />
+                            </a>
+                        </div>
+                    )}
                 </div>
             </section>
 
