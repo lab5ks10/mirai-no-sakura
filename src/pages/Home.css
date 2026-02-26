@@ -260,3 +260,90 @@
     font-size: 1rem;
     color: var(--color-text-primary);
 }
+
+/* --- Official Links Section --- */
+.official-links-section {
+    padding: 0 24px;
+    margin: 32px auto 80px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.official-links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.official-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px 24px;
+    text-decoration: none;
+    border-radius: var(--border-radius-panel);
+    /* 22px 角丸 */
+    transition: all var(--transition-normal);
+}
+
+/* 通常のパネルより少し暗くする */
+.glass-panel.dark-panel {
+    background: rgba(10, 25, 30, 0.7);
+    /* ディープティールより一段暗い背景 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    /* 影を濃くして落ち着かせる */
+    border: 1px solid rgba(191, 162, 94, 0.1);
+    /* 薄いゴールド枠 */
+}
+
+.glass-panel.dark-panel:hover {
+    background: rgba(10, 25, 30, 0.85);
+    /* ホバー時も明るすぎず上品に */
+    border-color: rgba(191, 162, 94, 0.3);
+    transform: translateY(-4px);
+    /* わずかに浮く */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(191, 162, 94, 0.15);
+    /* 品の良いグロー */
+}
+
+.official-link-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.official-link-label {
+    font-size: 0.7rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+.official-link-text {
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast);
+}
+
+.glass-panel.dark-panel:hover .official-link-text {
+    color: white;
+    /* ホバー時にテキストを明るく */
+}
+
+.official-link-icon {
+    color: var(--color-accent);
+    opacity: 0.8;
+    transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.glass-panel.dark-panel:hover .official-link-icon {
+    transform: translateX(4px);
+    /* アイコンが少し右に動く */
+    opacity: 1;
+}

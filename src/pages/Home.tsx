@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
 import { useMembers } from '../context/MemberContext';
 import MemberCard from '../components/members/MemberCard';
 import VideoCarousel from '../components/common/VideoCarousel';
@@ -70,6 +71,51 @@ const Home: React.FC = () => {
                     </div>
                 </section>
             )}
+
+            {/* 公式リンク セクション */}
+            <section className="official-links-section section animate-fade-in">
+                <h2 className="section-title">公式リンク</h2>
+                <div className="official-links-container">
+                    <a
+                        href="https://sakurazaka46.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="official-link-card glass-panel dark-panel"
+                    >
+                        <div className="official-link-content">
+                            <span className="official-link-label">Official Website</span>
+                            <span className="official-link-text">櫻坂46 公式サイトはこちら</span>
+                        </div>
+                        <ExternalLink size={20} className="official-link-icon" />
+                    </a>
+
+                    <a
+                        href="https://sakurazaka46.com/s/s46/page/4th_generation?ima=0000"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="official-link-card glass-panel dark-panel"
+                    >
+                        <div className="official-link-content">
+                            <span className="official-link-label">4th Generation Special</span>
+                            <span className="official-link-text">櫻坂46 四期生 お披露目特設サイトはこちら</span>
+                        </div>
+                        <ExternalLink size={20} className="official-link-icon" />
+                    </a>
+
+                    <a
+                        href="https://sakurazaka46.com/s/s46/page/4th_firstshowcase?ima=0000"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="official-link-card glass-panel dark-panel"
+                    >
+                        <div className="official-link-content">
+                            <span className="official-link-label">First Showcase</span>
+                            <span className="official-link-text">櫻坂46 四期生「First Showcase」特設サイトはこちら</span>
+                        </div>
+                        <ExternalLink size={20} className="official-link-icon" />
+                    </a>
+                </div>
+            </section>
         </div>
     );
 };
