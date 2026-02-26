@@ -10,10 +10,9 @@
     border-radius: var(--border-radius-panel);
     overflow: hidden;
     position: relative;
-    /* 背景: 深いティールブルー ＋ ドットパターン */
-    background-color: #072126;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
-    background-size: 20px 20px;
+    /* 背景: 深いティールブルー ＋ 上部からの薄い放射グラデーション（ドット廃止） */
+    background-color: #071A1E;
+    background-image: radial-gradient(circle at 50% 0%, rgba(22, 122, 140, 0.15) 0%, transparent 70%);
     box-shadow: var(--shadow-md);
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
