@@ -156,8 +156,45 @@
 }
 
 /* -----------------------------
-   MV Section
+/* -----------------------------
+   MV Section (Carousel)
 ----------------------------- */
+.mv-carousel {
+    width: 100%;
+}
+
+.mv-carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* max()を使って、画面幅800px以上なら中央揃えに追従、それ以下なら左右24pxの余白を保つ */
+    scroll-padding-left: max(24px, calc((100vw - 800px) / 2));
+    padding: 0 max(24px, calc((100vw - 800px) / 2)) 32px;
+    gap: 20px;
+    /* スクロールバー非表示 */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.mv-carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.mv-carousel-slide {
+    /* スマホでは画面幅から少し引いた幅にし、次の動画をチラ見せする */
+    flex: 0 0 calc(100vw - 72px);
+    max-width: 640px;
+    /* PCなどでは最大640px程度に */
+    scroll-snap-align: start;
+    transition: transform var(--transition-normal);
+}
+
+/* 1つしかない場合は、従来の最大幅(800px程度)をフルに使う */
+.mv-carousel-slide:only-child {
+    flex: 0 0 100%;
+    max-width: 800px;
+}
+
 .mv-container {
     position: relative;
     width: 100%;

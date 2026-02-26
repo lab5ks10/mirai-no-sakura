@@ -42,18 +42,26 @@ const Home: React.FC = () => {
 
             {/* 四期生 MV セクション */}
             {homeMvUrls && homeMvUrls.length > 0 && (
-                <section className="mv-section section animate-fade-in" style={{ padding: '0 24px', maxWidth: '800px', margin: '0 auto 48px', width: '100%', display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                    <h2 className="section-title" style={{ marginBottom: '0' }}>四期生 MV</h2>
-                    {homeMvUrls.map((url, idx) => (
-                        <div key={`${url}-${idx}`} className="mv-container glass-panel">
-                            <iframe
-                                src={url}
-                                title={`四期生 MV ${idx + 1}`}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
+                <section className="mv-section section animate-fade-in" style={{ padding: 0, margin: '0 0 48px', width: '100%' }}>
+                    <div style={{ padding: '0 24px', maxWidth: '800px', margin: '0 auto 24px' }}>
+                        <h2 className="section-title" style={{ margin: 0 }}>四期生 MV</h2>
+                    </div>
+                    <div className="mv-carousel">
+                        <div className="mv-carousel-track">
+                            {homeMvUrls.map((url, idx) => (
+                                <div key={`${url}-${idx}`} className="mv-carousel-slide">
+                                    <div className="mv-container glass-panel">
+                                        <iframe
+                                            src={url}
+                                            title={`四期生 MV ${idx + 1}`}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </section>
             )}
 
