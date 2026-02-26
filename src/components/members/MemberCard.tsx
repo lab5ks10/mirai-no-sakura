@@ -19,6 +19,9 @@ const MemberCard: React.FC<Props> = ({ member, index }) => {
             style={{ animationDelay }}
         >
             <div className="card-inner">
+                {/* 背景：日食（エクリプス）エフェクト */}
+                <div className="eclipse-bg"></div>
+
                 {/* 1. 左上の出身地ブロック */}
                 <div className="origin-block" style={{ backgroundColor: member.color1 }}>
                     <MapPin className="origin-icon" size={24} />
@@ -32,13 +35,11 @@ const MemberCard: React.FC<Props> = ({ member, index }) => {
                     <p className="member-name-kana">{member.nameKana}</p>
                 </div>
 
-                {/* 3. 左下の装飾ライン */}
-                <div className="decoration-lines">
-                    <div className="line line-1" style={{ backgroundColor: member.color2 }}></div>
-                    <div className="line line-2" style={{ backgroundColor: member.color2 }}></div>
-                    <div className="line line-3" style={{ backgroundColor: member.color2 }}></div>
-                    <div className="line line-4" style={{ backgroundColor: member.color2 }}></div>
-                    <div className="line line-5" style={{ backgroundColor: member.color2 }}></div>
+                {/* 3. 左下のテキストエリア (元装飾ライン位置) */}
+                <div className="card-description">
+                    {member.tags.map((tag, i) => (
+                        <span key={i} className="desc-tag">#{tag}</span>
+                    ))}
                 </div>
 
                 {/* 4. メインビジュアル（右下の巨大な正円） */}
