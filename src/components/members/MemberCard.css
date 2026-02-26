@@ -7,7 +7,7 @@
     aspect-ratio: 4 / 5;
     max-width: 400px;
     margin: 0 auto;
-    border-radius: 24px;
+    border-radius: var(--border-radius-panel);
     overflow: hidden;
     position: relative;
     /* 背景: 深いティールブルー ＋ ドットパターン */
@@ -26,8 +26,8 @@
 .card-inner {
     position: absolute;
     inset: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    border-radius: calc(var(--border-radius-panel) - 8px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -48,7 +48,7 @@
     color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 2;
-    border-radius: 4px;
+    border-radius: var(--border-radius-btn);
 }
 
 .origin-icon {
@@ -82,7 +82,7 @@
 
 .origin-text {
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.1em;
 }
 
@@ -98,14 +98,16 @@
 .member-name-en {
     font-size: 0.8rem;
     font-weight: 500;
-    letter-spacing: 0.15em;
-    color: var(--color-text-primary);
+    letter-spacing: 0.25em;
+    /* 英語表記は少し広めに */
+    color: var(--color-accent);
+    /* ゴールド統一 */
     margin: 0 0 4px 0;
 }
 
 .member-name-jp {
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--color-text-primary);
     margin: 0 0 4px 0;
@@ -135,13 +137,13 @@
 .desc-tag {
     font-size: 0.75rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-secondary);
+    background: rgba(14, 42, 47, 0.4);
     padding: 4px 10px;
-    border-radius: 4px;
+    border-radius: var(--border-radius-btn);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--color-border);
 }
 
 /* 4. メインビジュアル（右下の巨大な正円） */

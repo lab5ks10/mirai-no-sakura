@@ -46,17 +46,18 @@
 
 /* iframeを内包するglass-panel（カード自体）の設定 */
 .video-carousel-item.glass-panel {
-    border-radius: 0;
+    border-radius: var(--border-radius-panel);
     overflow: hidden;
     padding: 0;
     border: 1px solid var(--color-border);
     background: transparent;
-    transition: box-shadow var(--transition-fast);
+    transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 .video-carousel-item.glass-panel:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(191, 162, 94, 0.35);
+    /* ゴールドの統一ボーダー */
 }
 
 /* ドットインジケーター群 */
