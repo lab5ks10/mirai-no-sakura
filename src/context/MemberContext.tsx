@@ -9,8 +9,8 @@ interface MemberContextType {
     updateHomeYoutubeUrls: (urls: string[]) => void;
     homeSpotifyUrls: string[];
     updateHomeSpotifyUrls: (urls: string[]) => void;
-    homeMvUrl: string | null;
-    updateHomeMvUrl: (url: string | null) => void;
+    homeMvUrls: string[];
+    updateHomeMvUrls: (urls: string[]) => void;
 }
 
 const MemberContext = createContext<MemberContextType | undefined>(undefined);
@@ -77,9 +77,23 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         return ["https://open.spotify.com/embed/track/49cxVtrML7Xo63UFaaJrUR?utm_source=generator"];
     });
 
-    const [homeMvUrl, setHomeMvUrl] = useState<string | null>(() => {
-        const saved = localStorage.getItem('sakura_home_mv_url');
-        return saved ? saved : null;
+    const [homeMvUrls, setHomeMvUrls] = useState<string[]>(() => {
+        const saved = localStorage.getItem('sakura_home_mv_urls');
+        if (saved !== null) {
+            try {
+                return JSON.parse(saved);
+            } catch (e) {
+                console.error("Failed to parse saved home mv urls", e);
+            }
+        }
+
+        // 旧バージョンの単一URLからのマイグレーション
+        const oldSaved = localStorage.getItem('sakura_home_mv_url');
+        if (oldSaved !== null && oldSaved.trim() !== '') {
+            return [oldSaved];
+        }
+
+        return [];
     });
 
     useEffect(() => {
@@ -95,12 +109,8 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }, [homeSpotifyUrls]);
 
     useEffect(() => {
-        if (homeMvUrl) {
-            localStorage.setItem('sakura_home_mv_url', homeMvUrl);
-        } else {
-            localStorage.removeItem('sakura_home_mv_url');
-        }
-    }, [homeMvUrl]);
+        localStorage.setItem('sakura_home_mv_urls', JSON.stringify(homeMvUrls));
+    }, [homeMvUrls]);
 
     const updateMember = (updatedMember: Member) => {
         setMembers(prev => prev.map(m => m.id === updatedMember.id ? updatedMember : m));
@@ -114,8 +124,9 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setHomeSpotifyUrls(["https://open.spotify.com/embed/track/49cxVtrML7Xo63UFaaJrUR?utm_source=generator"]);
         localStorage.removeItem('sakura_home_spotify_urls');
         localStorage.removeItem('sakura_home_spotify_url'); // 古いキーも一応消しておく
-        setHomeMvUrl(null);
-        localStorage.removeItem('sakura_home_mv_url');
+        setHomeMvUrls([]);
+        localStorage.removeItem('sakura_home_mv_urls');
+        localStorage.removeItem('sakura_home_mv_url'); // 古いキーも一応消しておく
     };
 
     const updateHomeYoutubeUrls = (urls: string[]) => {
@@ -126,12 +137,12 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setHomeSpotifyUrls(urls);
     };
 
-    const updateHomeMvUrl = (url: string | null) => {
-        setHomeMvUrl(url);
+    const updateHomeMvUrls = (urls: string[]) => {
+        setHomeMvUrls(urls);
     };
 
     return (
-        <MemberContext.Provider value={{ members, updateMember, resetMembers, homeYoutubeUrls, updateHomeYoutubeUrls, homeSpotifyUrls, updateHomeSpotifyUrls, homeMvUrl, updateHomeMvUrl }}>
+        <MemberContext.Provider value={{ members, updateMember, resetMembers, homeYoutubeUrls, updateHomeYoutubeUrls, homeSpotifyUrls, updateHomeSpotifyUrls, homeMvUrls, updateHomeMvUrls }}>
             {children}
         </MemberContext.Provider>
     );

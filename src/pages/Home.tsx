@@ -7,7 +7,7 @@ import VideoCarousel from '../components/common/VideoCarousel';
 import './Home.css';
 
 const Home: React.FC = () => {
-    const { members, homeYoutubeUrls, homeSpotifyUrls, homeMvUrl } = useMembers();
+    const { members, homeYoutubeUrls, homeSpotifyUrls, homeMvUrls } = useMembers();
 
     return (
         <div className="home-page">
@@ -41,17 +41,19 @@ const Home: React.FC = () => {
             </section>
 
             {/* 四期生 MV セクション */}
-            {homeMvUrl && (
-                <section className="mv-section section animate-fade-in" style={{ padding: '0 24px', maxWidth: '800px', margin: '0 auto 48px', width: '100%' }}>
-                    <h2 className="section-title">四期生 MV</h2>
-                    <div className="mv-container glass-panel">
-                        <iframe
-                            src={homeMvUrl}
-                            title="四期生 MV"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
-                    </div>
+            {homeMvUrls && homeMvUrls.length > 0 && (
+                <section className="mv-section section animate-fade-in" style={{ padding: '0 24px', maxWidth: '800px', margin: '0 auto 48px', width: '100%', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                    <h2 className="section-title" style={{ marginBottom: '0' }}>四期生 MV</h2>
+                    {homeMvUrls.map((url, idx) => (
+                        <div key={`${url}-${idx}`} className="mv-container glass-panel">
+                            <iframe
+                                src={url}
+                                title={`四期生 MV ${idx + 1}`}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                    ))}
                 </section>
             )}
 

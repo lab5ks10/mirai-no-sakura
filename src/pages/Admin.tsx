@@ -6,14 +6,15 @@ import { Link } from 'react-router-dom';
 import './Admin.css';
 
 const Admin: React.FC = () => {
-    const { members, updateMember, resetMembers, homeYoutubeUrls, updateHomeYoutubeUrls, homeSpotifyUrls, updateHomeSpotifyUrls, homeMvUrl, updateHomeMvUrl } = useMembers();
+    const { members, updateMember, resetMembers, homeYoutubeUrls, updateHomeYoutubeUrls, homeSpotifyUrls, updateHomeSpotifyUrls, homeMvUrls, updateHomeMvUrls } = useMembers();
     const [selectedMemberId, setSelectedMemberId] = useState<string>(members[0]?.id || '');
     const [editForm, setEditForm] = useState<Member | null>(null);
     const [newTag, setNewTag] = useState('');
     const [newYoutubeUrl, setNewYoutubeUrl] = useState('');
     const [newHomeYoutubeUrl, setNewHomeYoutubeUrl] = useState('');
     const [localHomeUrls, setLocalHomeUrls] = useState<string[]>(homeYoutubeUrls);
-    const [localHomeMvUrl, setLocalHomeMvUrl] = useState<string>(homeMvUrl || '');
+    const [newHomeMvUrl, setNewHomeMvUrl] = useState('');
+    const [localHomeMvUrls, setLocalHomeMvUrls] = useState<string[]>(homeMvUrls);
     const [newHomeSpotifyUrl, setNewHomeSpotifyUrl] = useState('');
     const [localHomeSpotifyUrls, setLocalHomeSpotifyUrls] = useState<string[]>(homeSpotifyUrls);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -138,21 +139,42 @@ const Admin: React.FC = () => {
         setLocalHomeSpotifyUrls(newUrls);
     };
 
+    const handleAddHomeMvUrl = () => {
+        let urlToAdd = newHomeMvUrl.trim();
+        if (!urlToAdd) return;
+
+        if (!urlToAdd.includes('/embed/')) {
+            const videoIdMatch = urlToAdd.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+            if (videoIdMatch && videoIdMatch[1]) {
+                urlToAdd = `https://www.youtube.com/embed/${videoIdMatch[1]}?rel=0`;
+            }
+        }
+
+        if (!localHomeMvUrls.includes(urlToAdd)) {
+            setLocalHomeMvUrls([...localHomeMvUrls, urlToAdd]);
+            setNewHomeMvUrl('');
+        }
+    };
+
+    const handleRemoveHomeMvUrl = (urlToRemove: string) => {
+        setLocalHomeMvUrls(localHomeMvUrls.filter(u => u !== urlToRemove));
+    };
+
+    const handleMoveHomeMvUrl = (index: number, direction: 'up' | 'down') => {
+        const newUrls = [...localHomeMvUrls];
+        if (direction === 'up' && index > 0) {
+            [newUrls[index - 1], newUrls[index]] = [newUrls[index], newUrls[index - 1]];
+        } else if (direction === 'down' && index < newUrls.length - 1) {
+            [newUrls[index], newUrls[index + 1]] = [newUrls[index + 1], newUrls[index]];
+        }
+        setLocalHomeMvUrls(newUrls);
+    };
+
     const handleSave = () => {
         updateMember(editForm);
         updateHomeYoutubeUrls(localHomeUrls);
         updateHomeSpotifyUrls(localHomeSpotifyUrls);
-
-        // MV URLの自動embed変換処理
-        let formattedMvUrl = localHomeMvUrl.trim();
-        if (formattedMvUrl && !formattedMvUrl.includes('/embed/')) {
-            const videoIdMatch = formattedMvUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
-            if (videoIdMatch && videoIdMatch[1]) {
-                formattedMvUrl = `https://www.youtube.com/embed/${videoIdMatch[1]}?rel=0`;
-            }
-        }
-        updateHomeMvUrl(formattedMvUrl || null);
-        setLocalHomeMvUrl(formattedMvUrl);
+        updateHomeMvUrls(localHomeMvUrls);
 
         setShowSuccessMessage(true);
         setTimeout(() => setShowSuccessMessage(false), 3000);
@@ -374,23 +396,35 @@ const Admin: React.FC = () => {
                             トップページ 四期生MV (YouTube埋め込み)
                         </h3>
                         <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.85rem', marginBottom: '16px' }}>
-                            ※トップページの「四期生物語」セクションの直前に表示される、メインの四期生MVを指定します。<br />
-                            ※通常のYouTube URL（例: https://www.youtube.com/watch?v=... または https://youtu.be/...）を入力して保存すると、自動で埋め込み用URLに変換されます。<br />
-                            ※未設定（空欄）の場合はセクション自体が非表示になります。
+                            ※トップページの「四期生物語」セクションの直前に表示される、メインの四期生MVを指定します。複数登録可能です。<br />
+                            ※通常のYouTube URL（例: https://www.youtube.com/watch?v=... または https://youtu.be/...）を入力して追加すると、自動で埋め込み用URLに変換されます。<br />
+                            ※一つも登録しない場合はセクション自体が非表示になります。
                         </p>
+                        <div className="youtube-urls-container" style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
+                            {localHomeMvUrls.map((url, idx) => (
+                                <div key={url} className="url-row glass-panel" style={{ display: 'flex', alignItems: 'center', padding: '12px 16px', borderRadius: '0', gap: '8px' }}>
+                                    <span style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontSize: '0.9rem' }}>{url}</span>
+                                    <button onClick={() => handleMoveHomeMvUrl(idx, 'up')} disabled={idx === 0} style={{ background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '4px', color: idx === 0 ? 'rgba(255,255,255,0.2)' : 'var(--color-text-primary)', cursor: idx === 0 ? 'default' : 'pointer', padding: '4px 8px' }}>↑</button>
+                                    <button onClick={() => handleMoveHomeMvUrl(idx, 'down')} disabled={idx === localHomeMvUrls.length - 1} style={{ background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '4px', color: idx === localHomeMvUrls.length - 1 ? 'rgba(255,255,255,0.2)' : 'var(--color-text-primary)', cursor: idx === localHomeMvUrls.length - 1 ? 'default' : 'pointer', padding: '4px 8px' }}>↓</button>
+                                    <button onClick={() => handleRemoveHomeMvUrl(url)} style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '4px', marginLeft: '8px' }}>
+                                        <Trash2 size={16} />
+                                    </button>
+                                </div>
+                            ))}
+                            {localHomeMvUrls.length === 0 && <span style={{ color: 'var(--color-text-secondary)', padding: '8px' }}>URLが登録されていません</span>}
+                        </div>
                         <div style={{ display: 'flex', gap: '12px' }}>
                             <input
                                 type="url"
                                 placeholder="YouTube URLを入力（例: https://youtu.be/...）"
-                                value={localHomeMvUrl}
-                                onChange={e => setLocalHomeMvUrl(e.target.value)}
+                                value={newHomeMvUrl}
+                                onChange={e => setNewHomeMvUrl(e.target.value)}
+                                onKeyDown={e => e.key === 'Enter' && handleAddHomeMvUrl()}
                                 style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text-primary)', padding: '12px 16px', borderRadius: '4px', flex: 1 }}
                             />
-                            {localHomeMvUrl && (
-                                <button onClick={() => setLocalHomeMvUrl('')} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'transparent', border: '1px solid var(--color-border)', color: 'var(--color-text-secondary)', padding: '0 16px', borderRadius: '4px', cursor: 'pointer' }}>
-                                    クリア
-                                </button>
-                            )}
+                            <button onClick={handleAddHomeMvUrl} disabled={!newHomeMvUrl.trim()} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--color-surface-hover)', border: '1px solid var(--color-border)', color: 'white', padding: '0 24px', borderRadius: '4px', cursor: 'pointer', opacity: newHomeMvUrl.trim() ? 1 : 0.5 }}>
+                                <Plus size={18} /> 追加
+                            </button>
                         </div>
                     </div>
 
